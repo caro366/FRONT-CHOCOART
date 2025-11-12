@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "imagen": "https://i.pinimg.com/1200x/6e/62/da/6e62da44ad1b6eaad0ba4beb2ce9ad29.jpg",
+    "nombre": "Cartera Mola Guna",
+    "descripcion": "Elegante cartera cuadrada hecha con lona resistente, adornada con molas únicas de las talentosas manos indígenas Guna de Panamá. Cuenta con manijas de madera, cadena con baño de oro y un interior forrado con bolsillo incluido.",
+    "precio": 120000,
+    "precioAnterior": 150000,
+    "rating": 4,
+    "reviews": 30
+  },
+  {
+    "id": 2,
+    "imagen": "https://i.pinimg.com/736x/dc/33/12/dc3312ee4b20ff3482d83379c1f53a08.jpg",
+    "nombre": "Bolso Floral de Crochet",
+    "descripcion": "Bolso de crochet con diseño floral en tonos azules y amarillos. Hecho a mano, ideal para ocasiones informales y eventos al aire libre.",
+    "precio": 45000,
+    "precioAnterior": 60000,
+    "rating": 4,
+    "reviews": 25
+  },
+  {
+    "id": 3,
+    "imagen": "https://i.pinimg.com/736x/81/f2/8c/81f28ccf5a25ceacfe5c1384126508a9.jpg",
+    "nombre": "Bolso Bordado con Margaritas",
+    "descripcion": "Bolso de tela con bordado de margaritas en tonos cálidos. Perfecto para un look bohemio y casual.",
+    "precio": 50000,
+    "precioAnterior": 65000,
+    "rating": 5,
+    "reviews": 40
+  },
+  {
+    "id": 4,
+    "imagen": "https://i.pinimg.com/736x/d9/a5/8c/d9a58c226f6f3e740cf333fc06706994.jpg",
+    "nombre": "Bolso Upcycled con Cereza",
+    "descripcion": "Bolso hecho a partir de materiales reciclados, con diseño de cerezas bordadas. Una opción ecológica y estilizada.",
+    "precio": 40000,
+    "precioAnterior": 55000,
+    "rating": 3,
+    "reviews": 20
+  },
+  {
+    "id": 5,
+    "imagen": "https://i.pinimg.com/736x/31/79/5e/31795e35feaaabce440fc02bed2fafb8.jpg",
+    "nombre": "Bolso Bohemio",
+    "descripcion": "Bolso tejido a mano con cuentas y detalles en tonos tierra. Ideal para un estilo bohemio y relajado.",
+    "precio": 55000,
+    "precioAnterior": 70000,
+    "rating": 4,
+    "reviews": 35
+  },
+  {
+    "id": 6,
+    "imagen": "https://i.pinimg.com/736x/85/c2/82/85c282bdb3f49d7ae0661873334022fd.jpg",
+    "nombre": "Bolso Chic",
+    "descripcion": "Bolso de crochet con detalles de borlas en colores neutros. Perfecto para complementar cualquier atuendo.",
+    "precio": 48000,
+    "precioAnterior": 62000,
+    "rating": 4,
+    "reviews": 28
+  },
+  {
+    "id": 7,
+    "imagen": "https://i.pinimg.com/1200x/cf/bd/62/cfbd623fc7965ff4469279727c1df1ed.jpg",
+    "nombre": "Mochila Bohemia Tejida",
+    "descripcion": "Mochila tejida a mano con diseño bohemio y detalles en colores vibrantes. Espaciosa y práctica para el día a día.",
+    "precio": 70000,
+    "precioAnterior": 85000,
+    "rating": 5,
+    "reviews": 50
+  },
+  {
+    "id": 8,
+    "imagen": "https://i.pinimg.com/1200x/a4/ae/87/a4ae87317f6f460c76c8d54b62fc0e9e.jpg",
+    "nombre": "Bolso Vintage Bordado",
+    "descripcion": "Bolso de tela vintage con bordado de mandalas en colores cálidos. Ideal para un estilo retro y artístico.",
+    "precio": 60000,
+    "precioAnterior": 75000,
+    "rating": 4,
+    "reviews": 33
+  }
+]

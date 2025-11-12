@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Aretes de Semillas Naturales",
+    "descripcion": "Aretes elaborados con semillas amazónicas y fibras vegetales del Chocó",
+    "precio": 25000,
+    "precio_anterior": 30000,
+    "imagen": "https://i.pinimg.com/736x/7a/8e/37/7a8e3701b2de3ab26757e65c4bc36bd5.jpg",
+    "rating": 4.8,
+    "reviews": 25,
+    "stock": 15,
+    "destacado": true
+  },
+  {
+    "id": 2,
+    "nombre": "Aretes Tradicionales Wounaan",
+    "descripcion": "Diseño tradicional de la comunidad Wounaan con chaquiras",
+    "precio": 35000,
+    "precio_anterior": null,
+    "imagen": "https://i.pinimg.com/736x/cf/43/21/cf43215bdfbc8b8205e2def2490d8be9.jpg",
+    "rating": 4.7,
+    "reviews": 18,
+    "stock": 8,
+    "destacado": false
+  }
+]
