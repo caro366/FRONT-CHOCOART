@@ -1,4 +1,3 @@
-// app/ScreensUser/pedidosScreen.jsx
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, RefreshControl } from 'react-native';
 import { Surface, Button, Icon, ActivityIndicator } from 'react-native-paper';

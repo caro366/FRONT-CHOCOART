@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Button, Surface, Icon } from "react-native-paper";
 import { useCart } from "../ScreensUser/productCard";
-import { buscarProductos } from "../../services/productoService"; // ✅ CAMBIAR IMPORT
+import { buscarProductos } from "../../services/productoService"; 
 
 export default function SearchScreen() {
   const [query, setQuery] = useState("");
@@ -18,17 +18,16 @@ export default function SearchScreen() {
   const [loading, setLoading] = useState(false);
   const { agregarAlCarrito, carrito } = useCart();
 
-  // ✅ ACTUALIZAR: Usar el nuevo endpoint de búsqueda
+ 
   const handleSearch = async (text) => {
     setQuery(text);
 
     if (text.trim().length > 0) {
       setLoading(true);
       try {
-        // ✅ CAMBIAR: Usar la nueva función de búsqueda
         const response = await buscarProductos(text);
 
-        // ✅ CAMBIAR: La respuesta ahora viene en response.productos
+       
         if (response.success) {
           setFilteredData(response.productos || []);
         } else {
@@ -45,7 +44,7 @@ export default function SearchScreen() {
     }
   };
 
-  // ✅ RENDERIZAR CADA PRODUCTO (adaptado a la nueva estructura)
+  //  RENDERIZAR CADA PRODUCTO (adaptado a la nueva estructura)
   const renderProductItem = ({ item }) => {
     const enCarrito = carrito.find((p) => p.id === item.id);
 
@@ -67,7 +66,7 @@ export default function SearchScreen() {
             {item.descripcion || "Sin descripción"}
           </Text>
 
-          {/* ✅ NUEVO: Mostrar categoría y subcategoría */}
+          {/*  NUEVO: Mostrar categoría y subcategoría */}
           {(item.categoria || item.subcategoria) && (
             <Text style={styles.categoryText}>
               {item.categoria} {item.subcategoria ? ` › ${item.subcategoria}` : ''}

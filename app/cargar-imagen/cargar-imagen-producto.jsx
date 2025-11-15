@@ -18,11 +18,7 @@ export default function CargarImagenPagina() {
 
   const producto = useLocalSearchParams();
 
-  /*
-  Se requiere instalar expo-image-picker
-  npm install expo-image-picker
-  
-  */
+ 
   console.log(producto);
 
 

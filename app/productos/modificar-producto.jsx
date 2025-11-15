@@ -85,7 +85,7 @@ export default function ModificarProducto() {
       return;
     }
 
-    // VALIDACIÓN QUE FALTABA: subcategoría debe estar entre 1 y 8
+    // subcategoría debe estar entre 1 y 8
     const sub = parseInt(formulario.subcategoria_id);
     if (isNaN(sub) || sub < 1 || sub > 8) {
       setMensaje({

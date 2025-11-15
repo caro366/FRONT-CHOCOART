@@ -64,7 +64,7 @@ export default function IniciarSesion() {
       const data = await iniciarSesion(correoLimpio, contrasenaLimpia);
       console.log("Datos de sesión:", data);
       
-      showDialog("Acceso correcto", "Bienvenido al sistema.");
+      showDialog("Acceso correcto", "Bienvenid@ a ChocoArt.");
       setTimeout(() => router.replace("/menu/menu"), 1500);
     } catch (e) {
       console.error("Error al iniciar sesión:", e);

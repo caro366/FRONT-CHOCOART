@@ -18,7 +18,7 @@ import {
   Chip,
 } from "react-native-paper";
 import { router } from "expo-router";
-import { useFocusEffect } from "@react-navigation/native"; // ✅ AGREGADO
+import { useFocusEffect } from "@react-navigation/native"; 
 import { obtenerPerfil, cerrarSesion, obtenerToken } from "../../services/autenticacion";
 import { obtenerPedidosUsuario} from "../../services/pedidoService";
 import { useCart } from "./productCard";
@@ -430,7 +430,7 @@ export default function Perfil() {
           </Card.Content>
         </Card>
 
-        {/* BOTÓN CERRAR SESIÓN */}
+       
         <Button
           mode="contained"
           icon="logout"

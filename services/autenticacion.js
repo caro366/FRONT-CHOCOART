@@ -65,7 +65,7 @@ export async function obtenerRol() {
   return rol;
 }
 
-// ✅ NUEVA FUNCIÓN PARA OBTENER EL ID DEL USUARIO
+//   PARA OBTENER EL ID DEL USUARIO
 export async function obtenerUsuarioId() {
   try {
     const perfil = await obtenerPerfil();

@@ -75,7 +75,7 @@ export async function listarSubcategorias(categoriaId = null) {
   }
 }
 
-// ✅ FUNCIÓN DE BÚSQUEDA - CORREGIDA
+//  FUNCIÓN DE BÚSQUEDA 
 export async function buscarProductos(termino, limite = 20) {
   try {
     const { data } = await cliente.get("/productos/buscar", {

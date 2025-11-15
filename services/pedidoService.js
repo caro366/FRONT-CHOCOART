@@ -1,4 +1,3 @@
-// services/pedidoService.js
 import { cliente } from '../config/cliente';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,17 +15,17 @@ export const crearPedido = async (pedidoData) => {
   try {
     const headers = await getAuthHeaders();
     
-    console.log("📤 Enviando pedido al servidor:", JSON.stringify(pedidoData, null, 2));
+    console.log(" Enviando pedido al servidor:", JSON.stringify(pedidoData, null, 2));
     
     const response = await cliente.post('/pedidos/crear', pedidoData, { headers });
     
-    console.log("✅ Respuesta del servidor:", response.data);
+    console.log(" Respuesta del servidor:", response.data);
     
     return response.data;
   } catch (error) {
-    console.error('❌ Error al crear pedido:', error);
-    console.error('❌ Detalles del error:', error.response?.data);
-    console.error('❌ Status del error:', error.response?.status);
+    console.error(' Error al crear pedido:', error);
+    console.error(' Detalles del error:', error.response?.data);
+    console.error(' Status del error:', error.response?.status);
     throw error;
   }
 };

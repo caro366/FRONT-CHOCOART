@@ -1,4 +1,3 @@
-// services/carritoService.js
 import { cliente } from "../config/cliente";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

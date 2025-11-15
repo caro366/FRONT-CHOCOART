@@ -1,4 +1,3 @@
-// app/ScreensUser/cartScreen.jsx
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList } from "react-native";
 import {
@@ -119,7 +118,7 @@ export default function CartScreen() {
       setDireccionVisible(false);
 
     } catch (error) {
-      console.error('❌ Error al procesar compra:', error);
+      console.error(' Error al procesar compra:', error);
 
       let mensajeError = "Error al procesar la compra. Por favor, intenta nuevamente.";
 
@@ -172,8 +171,8 @@ export default function CartScreen() {
   };
 
   const ProcederCompra = () => {
-    console.log("🛒 Iniciando proceso de compra, usuarioId:", usuarioId);
-    console.log("📦 Productos en carrito:", carrito);
+    console.log(" Iniciando proceso de compra, usuarioId:", usuarioId);
+    console.log(" Productos en carrito:", carrito);
 
     if (carrito.length === 0) {
       showSnackbar("El carrito está vacío");

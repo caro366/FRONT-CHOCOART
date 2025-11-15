@@ -12,8 +12,8 @@ export default function Layout() {
           screenOptions={{
             headerShown: true, 
             headerTitle: "",  // Oculta todos los headers
-            contentStyle: {       // Aplica estilo global a TODAS las pantallas
-              paddingTop: 0,     // Espacio arriba (global)
+            contentStyle: {       
+              paddingTop: 0,     
             }
           }}
         >
@@ -40,7 +40,7 @@ export default function Layout() {
           
           {/* RUTAS ADICIONALES */}
           <Stack.Screen name="productos/categoria" />
-          <Stack.Screen name="ScreensUser/ferias" options={{ headerBackTitleVisible: false }} />  {/*No funciona */}
+          <Stack.Screen name="ScreensUser/ferias" options={{ headerBackTitleVisible: false }} />  
 
         </Stack>
       </CartProvider>

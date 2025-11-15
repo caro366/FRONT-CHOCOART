@@ -1,4 +1,3 @@
-// app/ScreensUser/productCard.jsx
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   View,
@@ -28,7 +27,7 @@ import {
 
 import { estaAutenticado } from "../../services/autenticacion";
 
-// Contexto del carrito
+
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -51,7 +50,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const data = await obtenerCarritoAPI();
-      // Transformar los items del backend al formato esperado
+ 
       const itemsTransformados = data.items.map(item => ({
         id: item.producto_id,
         nombre: item.nombre,
@@ -147,7 +146,7 @@ export const CartProvider = ({ children }) => {
         totalItems,
         cargarCarritoDesdeAPI,
         cargando,
-        usuarioId,       // ✅ añadido
+        usuarioId,      
         setUsuarioId,
       }}
     >
@@ -164,7 +163,7 @@ export const useCart = () => {
   return context;
 };
 
-// Componente ProductCard mejorado
+
 export default function ProductCard({ productos = [] }) {
   const { agregarAlCarrito, carrito } = useCart();
   const [visibleDialog, setVisibleDialog] = useState(false);

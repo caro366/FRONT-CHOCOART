@@ -1,4 +1,3 @@
-// app/ScreensUser/home.jsx
 import * as React from "react";
 import {
   View,
@@ -147,7 +146,7 @@ const InicioRoute = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F5F5F4" }}>
-      {/* HEADER CON LOGO Y PERFIL */}
+      
       <View style={styles.headerContainer}>
         <View style={styles.headerTop}>
           <Image
@@ -237,7 +236,7 @@ const InicioRoute = () => {
             ))}
           </ScrollView>
 
-          {/* Indicadores (puntos) */}
+      
           <View style={styles.dotsContainer}>
             {galleryImages.map((_, i) => (
               <View
@@ -415,7 +414,7 @@ const InicioRoute = () => {
   );
 };
 
-// Resto igual
+
 const CarritoRoute = () => <CartScreen />;
 const BuscarRoute = () => <SearchScreen />;
 const FeriasRoute = () => <Ferias />;
@@ -580,7 +579,7 @@ const styles = StyleSheet.create({
   },
 
   cardWrapper: {
-    width: "46%", // 🔥 Para tener 2 por fila
+    width: "46%", 
     marginBottom: 16,
   },
 
@@ -593,7 +592,7 @@ const styles = StyleSheet.create({
 
   productImage: {
     width: "100%",
-    height: 160, // Ajusta si lo quieres más alto
+    height: 160, 
   },
 
   productInfo: {

@@ -11,7 +11,7 @@ export default function CrearProducto() {
     destacado: false,
     descripcion: "",
     subcategoria_id: "",
-    artesano_id: "2" // ID del artesano por defecto (María Córdoba)
+    artesano_id: "2"  
   });
 
   const [cargando, setCargando] = useState(false);
@@ -47,8 +47,7 @@ export default function CrearProducto() {
 
       await crearProducto(datos);
       setMensaje({ tipo: "success", texto: "Producto creado correctamente." });
-      
-      // Limpiar formulario después de 2 segundos
+    
       setTimeout(() => {
         limpiar();
       }, 2000);

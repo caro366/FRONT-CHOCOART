@@ -1,4 +1,3 @@
-// app/productos/subcategoria.jsx
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Text, ActivityIndicator, Button } from "react-native-paper";
