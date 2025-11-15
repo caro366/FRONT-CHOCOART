@@ -10,7 +10,7 @@ export default function ProductosPorSubcategoria() {
   const params = useLocalSearchParams();
   const subcategoriaId = params.subcategoriaId ? parseInt(params.subcategoriaId) : null;
   const subcategoriaNombre = params.subcategoriaNombre || "Productos";
-  
+
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ export default function ProductosPorSubcategoria() {
       setCargando(false);
       return;
     }
-    
+
     setCargando(true);
     setError(null);
     try {
@@ -41,46 +41,35 @@ export default function ProductosPorSubcategoria() {
   };
 
   return (
-    <>
-      <Stack.Screen 
-        options={{ 
-          headerShown: true, 
-          title: subcategoriaNombre,
-          headerStyle: {
-            backgroundColor: '#f9f8ff',
-          },
-        }} 
-      />
-      
-      <View style={styles.container}>
-        {cargando ? (
-          <View style={styles.cargandoContainer}>
-            <ActivityIndicator animating={true} size="large" color="#A26B38" />
-            <Text style={styles.cargandoTexto}>Cargando productos...</Text>
-          </View>
-        ) : error ? (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorTexto}>{error}</Text>
-            <Button 
-              mode="contained" 
-              onPress={cargarProductos}
-              style={styles.reintentarBtn}
-            >
-              Reintentar
-            </Button>
-          </View>
-        ) : productos.length === 0 ? (
-          <View style={styles.vacioContainer}>
-            <Text style={styles.vacioTexto}>No hay productos en esta categoría</Text>
-            <Text style={styles.vacioSubtexto}>
-              Prueba con otra subcategoría o vuelve más tarde
-            </Text>
-          </View>
-        ) : (
-          <ProductCard productos={productos} />
-        )}
-      </View>
-    </>
+
+    <View style={styles.container}>
+      {cargando ? (
+        <View style={styles.cargandoContainer}>
+          <ActivityIndicator animating={true} size="large" color="#A26B38" />
+          <Text style={styles.cargandoTexto}>Cargando productos...</Text>
+        </View>
+      ) : error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorTexto}>{error}</Text>
+          <Button
+            mode="contained"
+            onPress={cargarProductos}
+            style={styles.reintentarBtn}
+          >
+            Reintentar
+          </Button>
+        </View>
+      ) : productos.length === 0 ? (
+        <View style={styles.vacioContainer}>
+          <Text style={styles.vacioTexto}>No hay productos en esta categoría</Text>
+          <Text style={styles.vacioSubtexto}>
+            Prueba con otra subcategoría o vuelve más tarde
+          </Text>
+        </View>
+      ) : (
+        <ProductCard productos={productos} />
+      )}
+    </View>
   );
 }
 

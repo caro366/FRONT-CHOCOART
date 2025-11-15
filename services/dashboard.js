@@ -4,4 +4,3 @@ export async function obtenerValores() {
   const { data } = await cliente.get("/dashboard");
   return data;
 }
- 

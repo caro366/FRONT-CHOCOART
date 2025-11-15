@@ -234,7 +234,7 @@ export default function CartScreen() {
           {item.descripcion}
         </Text>
         <Text style={{ fontSize: 14, color: "#666", marginBottom: 4 }}>
-          $/. {item.precio?.toFixed(2) || "0.00"} c/u
+          ${Number(item.precio || 0).toFixed(0)}
         </Text>
         {item.stock !== undefined && (
           <Text style={{ fontSize: 12, color: item.stock > 0 ? "#4CAF50" : "#F44336" }}>
@@ -372,7 +372,7 @@ export default function CartScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
+    <View style={{ flex: 1, backgroundColor: "#f5f5f5" , marginTop: 30,}}>
       <FlatList
         data={carrito}
         keyExtractor={(item) => item.id.toString()}
@@ -463,16 +463,7 @@ export default function CartScreen() {
             {procesandoCompra ? "Procesando..." : "Comprar"}
           </Button>
 
-          <Button
-            mode="outlined"
-            onPress={() => {}}
-            style={{
-              flex: 0.2,
-              marginLeft: 5,
-            }}
-          >
-            Test
-          </Button>
+          
         </View>
       </View>
 

@@ -1,25 +1,31 @@
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, Alert } from "react-native";
 import { Text, Banner, Button, ActivityIndicator, TextInput } from "react-native-paper";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { eliminarProducto, obtenerProducto } from "../../services/productoService";
+import { useLocalSearchParams, useRouter } from 'expo-router';
 
 export default function EliminarProductoPorId() {
+  const params = useLocalSearchParams();
+  const router = useRouter();
   const [id, setId] = useState("");
   const [productoInfo, setProductoInfo] = useState(null);
   const [mensaje, setMensaje] = useState(null);
   const [cargando, setCargando] = useState(false);
 
-  async function buscarProducto() {
-    if (!id.trim()) {
-      setMensaje({ tipo: "danger", texto: "Por favor ingrese un ID válido." });
-      return;
+  // Cargar producto automáticamente si viene ID en la URL
+  useEffect(() => {
+    if (params.id) {
+      setId(params.id);
+      buscarProductoAutomatico(params.id);
     }
+  }, [params.id]);
 
+  async function buscarProductoAutomatico(productoId) {
     setCargando(true);
     setProductoInfo(null);
     
     try {
-      const data = await obtenerProducto(id);
+      const data = await obtenerProducto(productoId);
       setProductoInfo(data);
       setMensaje({ tipo: "success", texto: "Producto encontrado. Revise los datos antes de eliminar." });
     } catch (e) {
@@ -28,6 +34,15 @@ export default function EliminarProductoPorId() {
     } finally {
       setCargando(false);
     }
+  }
+
+  async function buscarProducto() {
+    if (!id.trim()) {
+      setMensaje({ tipo: "danger", texto: "Por favor ingrese un ID válido." });
+      return;
+    }
+
+    await buscarProductoAutomatico(id);
   }
 
   async function onEliminar() {
@@ -41,18 +56,41 @@ export default function EliminarProductoPorId() {
       return;
     }
 
-    setCargando(true);
-    try {
-      await eliminarProducto(id);
-      setMensaje({ tipo: "success", texto: `Producto "${productoInfo.nombre}" eliminado correctamente.` });
-      setId("");
-      setProductoInfo(null);
-    } catch (e) {
-      const errorMsg = e?.response?.data?.detail || "Error al eliminar el producto.";
-      setMensaje({ tipo: "danger", texto: errorMsg });
-    } finally {
-      setCargando(false);
-    }
+    // Confirmación con Alert nativo
+    Alert.alert(
+      "Confirmar eliminación",
+      `¿Está seguro de eliminar el producto "${productoInfo.nombre}"?\n\nEsta acción no se puede deshacer.`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: async () => {
+            setCargando(true);
+            try {
+              await eliminarProducto(id);
+              setMensaje({ 
+                tipo: "success", 
+                texto: `Producto "${productoInfo.nombre}" eliminado correctamente de la base de datos.` 
+              });
+              
+              // Limpiar después de mostrar mensaje
+              setTimeout(() => {
+                limpiar();
+              }, 2000);
+            } catch (e) {
+              const errorMsg = e?.response?.data?.detail || "Error al eliminar el producto.";
+              setMensaje({ tipo: "danger", texto: errorMsg });
+            } finally {
+              setCargando(false);
+            }
+          }
+        }
+      ]
+    );
   }
 
   function limpiar() {
@@ -124,7 +162,7 @@ export default function EliminarProductoPorId() {
             fontSize: 22,
             fontWeight: "bold",
             textAlign: "center",
-            color: "#336fafff",
+            color: "#A26B38",
             marginBottom: 25,
           }}
         >
@@ -149,7 +187,7 @@ export default function EliminarProductoPorId() {
             loading={cargando}
             disabled={cargando}
             style={{
-              backgroundColor: "#336fafff",
+              backgroundColor: "#A26B38",
               borderRadius: 8,
               paddingVertical: 5,
               marginBottom: 15,
@@ -168,11 +206,14 @@ export default function EliminarProductoPorId() {
               borderRadius: 8,
               marginBottom: 20,
               borderLeftWidth: 4,
-              borderLeftColor: "#336fafff",
+              borderLeftColor: "#A26B38",
             }}
           >
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "#333", marginBottom: 8 }}>
               Información del Producto:
+            </Text>
+            <Text style={{ color: "#555", marginBottom: 4 }}>
+              <Text style={{ fontWeight: "600" }}>ID:</Text> {productoInfo.id}
             </Text>
             <Text style={{ color: "#555", marginBottom: 4 }}>
               <Text style={{ fontWeight: "600" }}>Nombre:</Text> {productoInfo.nombre}
@@ -183,6 +224,11 @@ export default function EliminarProductoPorId() {
             <Text style={{ color: "#555", marginBottom: 4 }}>
               <Text style={{ fontWeight: "600" }}>Stock:</Text> {productoInfo.stock || 0}
             </Text>
+            {productoInfo.subcategoria_id && (
+              <Text style={{ color: "#555", marginBottom: 4 }}>
+                <Text style={{ fontWeight: "600" }}>Subcategoría ID:</Text> {productoInfo.subcategoria_id}
+              </Text>
+            )}
             {productoInfo.descripcion && (
               <Text style={{ color: "#555", marginTop: 4 }}>
                 <Text style={{ fontWeight: "600" }}>Descripción:</Text> {productoInfo.descripcion}
@@ -198,7 +244,7 @@ export default function EliminarProductoPorId() {
           loading={cargando}
           disabled={cargando || !productoInfo}
           style={{
-            backgroundColor: "#F44336",
+            backgroundColor: "#fa857cff",
             borderRadius: 8,
             paddingVertical: 5,
             marginBottom: 10,
@@ -211,10 +257,10 @@ export default function EliminarProductoPorId() {
           mode="outlined"
           onPress={limpiar}
           disabled={cargando}
-          textColor="#336fafff"
+          textColor="#A26B38"
           style={{
             borderRadius: 8,
-            borderColor: "#336fafff",
+            borderColor: "#A26B38ff",
             borderWidth: 1,
           }}
         >

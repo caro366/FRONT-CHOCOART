@@ -20,23 +20,25 @@ import {
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import CartScreen from "../ScreensUser/cartScreen.jsx";
-import bolsos from "../../assets/json/bolsos.json";
 import Perfil from "../ScreensUser/perfil.jsx";
 import SearchScreen from "../ScreensUser/search";
 import { useCart } from "../ScreensUser/productCard";
-import { listarCategorias, listarSubcategorias } from "../../services/productoService";
+import { listarCategorias, listarSubcategorias, listarProductosDestacados } from "../../services/productoService";
 import { router } from "expo-router";
 import Ferias from "../ScreensUser/ferias.jsx";
 
 const InicioRoute = () => {
   const navigation = useNavigation();
-  const productosDestacadosBolsos = bolsos.slice(0, 6);
-  
+
+  // ESTADO PARA PRODUCTOS DESTACADOS
+  const [productosDestacados, setProductosDestacados] = React.useState([]);
+  const [cargandoProductos, setCargandoProductos] = React.useState(true);
+
   // ESTADO PARA CATEGORÍAS Y SUBCATEGORÍAS REALES
   const [categoriasReales, setCategoriasReales] = React.useState([]);
   const [todasSubcategorias, setTodasSubcategorias] = React.useState([]);
   const [cargandoCategorias, setCargandoCategorias] = React.useState(false);
-  
+
   // ESTADO PARA EL MODAL
   const [modalVisible, setModalVisible] = React.useState(false);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = React.useState(null);
@@ -56,6 +58,22 @@ const InicioRoute = () => {
   React.useEffect(() => {
     cargarDatosDesdeBackend();
   }, []);
+  // CARGAR PRODUCTOS DESTACADOS AL INICIAR
+  React.useEffect(() => {
+    cargarProductosDestacados();
+  }, []);
+
+  const cargarProductosDestacados = async () => {
+    setCargandoProductos(true);
+    try {
+      const productos = await listarProductosDestacados(6);
+      setProductosDestacados(productos);
+    } catch (error) {
+      console.error("Error cargando productos destacados:", error);
+    } finally {
+      setCargandoProductos(false);
+    }
+  };
 
   const cargarDatosDesdeBackend = async () => {
     setCargandoCategorias(true);
@@ -63,11 +81,11 @@ const InicioRoute = () => {
       // Cargar categorías principales
       const categoriasData = await listarCategorias();
       setCategoriasReales(categoriasData);
-      
+
       // Cargar todas las subcategorías
       const subcategoriasData = await listarSubcategorias();
       setTodasSubcategorias(subcategoriasData);
-      
+
     } catch (error) {
       console.error("Error cargando datos:", error);
     } finally {
@@ -91,9 +109,9 @@ const InicioRoute = () => {
     setModalVisible(false);
     router.push({
       pathname: "/productos/subcategoria",
-      params: { 
-        subcategoriaId: subcategoria.id, 
-        subcategoriaNombre: subcategoria.nombre 
+      params: {
+        subcategoriaId: subcategoria.id,
+        subcategoriaNombre: subcategoria.nombre
       }
     });
   };
@@ -110,7 +128,7 @@ const InicioRoute = () => {
       "Collares": "necklace",
       "Bolsos": "bag-personal",
       "Sombreros": "hat-fedora",
-      "Turbantes": "tshirt-crew",
+      "Turbantes": "account-tie-woman",
       "Ebanistería": "hammer",
     };
     return mapeoIconos[nombre] || "package-variant";
@@ -119,11 +137,12 @@ const InicioRoute = () => {
   // GALERÍA DE IMÁGENES
   const [activeIndex, setActiveIndex] = React.useState(0);
   const galleryImages = [
-    "https://i.pinimg.com/736x/7a/8e/37/7a8e3701b2de3ab26757e65c4bc36bd5.jpg",
-    "https://i.pinimg.com/736x/cf/43/21/cf43215bdfbc8b8205e2def2490d8be9.jpg",
-    "https://i.pinimg.com/736x/1f/87/2a/1f872a4b0647cadef71fd87bf6b830de.jpg",
-    "https://i.pinimg.com/736x/40/e7/30/40e7300e16125a93d75a080fa727938a.jpg",
-    "https://i.pinimg.com/736x/99/8a/03/998a0341bf34a69460313b6143296da7.jpg",
+    require("../../assets/img/galeria2.jpg"),
+    require("../../assets/img/galeria4.jpg"),
+    require("../../assets/img/galeria6.jpg"),
+    require("../../assets/img/galeria5.jpg"),
+    require("../../assets/img/galeria3.jpg"),
+    require("../../assets/img/galeria1.jpg"),
   ];
 
   return (
@@ -145,9 +164,7 @@ const InicioRoute = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* BANNER PRINCIPAL */}
         <ImageBackground
-          source={{
-            uri: "https://i.pinimg.com/736x/7a/8e/37/7a8e3701b2de3ab26757e65c4bc36bd5.jpg",
-          }}
+          source={require("../../assets/img/principal.jpg")}
           style={styles.banner}
           imageStyle={{ borderRadius: 20 }}
           resizeMode="cover"
@@ -164,8 +181,8 @@ const InicioRoute = () => {
               Cada pieza cuenta una historia única
             </Text>
 
-             <TouchableOpacity 
-              style={styles.exploreButton} 
+            <TouchableOpacity
+              style={styles.exploreButton}
               onPress={() => router.push("/ScreensUser/ancestralidad")}
             >
               <Text style={styles.exploreText}>Explora las historias →</Text>
@@ -214,7 +231,8 @@ const InicioRoute = () => {
           >
             {galleryImages.map((uri, index) => (
               <Surface key={index} style={styles.galleryCard}>
-                <Image source={{ uri }} style={styles.galleryImage} />
+                <Image source={uri} style={styles.galleryImage} />
+
               </Surface>
             ))}
           </ScrollView>
@@ -236,24 +254,48 @@ const InicioRoute = () => {
         {/* PRODUCTOS DESTACADOS */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Productos Destacados</Text>
-          <View style={styles.productGrid}>
-            {productosDestacadosBolsos.map((item) => (
-              <Surface key={item.id} style={styles.productCard} elevation={3}>
-                <Image
-                  source={{ uri: item.imagen }}
-                  style={styles.productImage}
-                  resizeMode="cover"
-                />
-                <View style={styles.productInfo}>
-                  <Text style={styles.productName}>{item.nombre}</Text>
-                  <Text style={styles.productDescription} numberOfLines={2}>
-                    {item.descripcion}
-                  </Text>
-                </View>
-              </Surface>
-            ))}
-          </View>
+
+          {cargandoProductos ? (
+            <Text style={{ textAlign: 'center', color: '#8B7355', padding: 20 }}>
+              Cargando productos...
+            </Text>
+          ) : productosDestacados.length === 0 ? (
+            <Text style={{ textAlign: 'center', color: '#8B7355', padding: 20 }}>
+              No hay productos destacados
+            </Text>
+          ) : (
+
+            <View style={styles.gridContainer}>
+              {productosDestacados.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  activeOpacity={0.7}
+                  style={styles.cardWrapper}
+                >
+                  <Surface style={styles.destacadoCard} elevation={3}>
+                    <Image
+                      source={{ uri: item.imagenes[0].ruta }}
+                      style={styles.productImage}
+                      resizeMode="cover"
+                    />
+
+                    <View style={styles.productInfo}>
+                      <Text style={styles.productName} numberOfLines={2}>
+                        {item.nombre}
+                      </Text>
+                      <Text style={styles.productDescription} numberOfLines={2}>
+                        {item.descripcion}
+                      </Text>
+                    </View>
+                  </Surface>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
         </View>
+
+
+
 
         {/* POR QUÉ ELEGIRNOS */}
         <Card style={styles.valuesCard}>
@@ -345,10 +387,10 @@ const InicioRoute = () => {
                     onPress={() => navegarASubcategoria(subcategoria)}
                   >
                     <View style={styles.subcategoriaIconContainer}>
-                      <Icon 
-                        source={obtenerIconoPorNombre(subcategoria.nombre)} 
-                        size={28} 
-                        color="#A26B38" 
+                      <Icon
+                        source={obtenerIconoPorNombre(subcategoria.nombre)}
+                        size={28}
+                        color="#A26B38"
                       />
                     </View>
                     <View style={styles.subcategoriaInfo}>
@@ -385,7 +427,8 @@ export default function HomeScreen() {
     { key: "inicio", title: "Inicio", focusedIcon: "home" },
     { key: "carrito", title: "Carrito", focusedIcon: "cart" },
     { key: "buscar", title: "Buscar", focusedIcon: "magnify" },
-    { key: "ferias", title: "Ferias", focusedIcon: "account" },
+    { key: "ferias", title: "Ferias", focusedIcon: "hand-heart" },
+
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -426,7 +469,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 12,
   },
-  logo: { width: 100, height: 40 },
+  logo: { width: "45%", height: "1000%" },
   banner: {
     margin: 16,
     borderRadius: 20,
@@ -528,30 +571,48 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
   },
-  productGrid: {
+  gridContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    paddingHorizontal: 10,
+    marginTop: 12,
   },
-  productCard: {
-    width: "48%",
-    borderRadius: 16,
-    backgroundColor: "#FFF",
+
+  cardWrapper: {
+    width: "46%", // 🔥 Para tener 2 por fila
     marginBottom: 16,
-    overflow: "hidden",
   },
-  productImage: { width: "100%", height: 130 },
-  productInfo: { padding: 10 },
+
+  destacadoCard: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    overflow: "hidden",
+    elevation: 3,
+  },
+
+  productImage: {
+    width: "100%",
+    height: 160, // Ajusta si lo quieres más alto
+  },
+
+  productInfo: {
+    padding: 8,
+  },
+
   productName: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "600",
     color: "#5A3E2B",
   },
+
   productDescription: {
-    fontSize: 12,
+    fontSize: 11,
     color: "#8B6E53",
-    marginVertical: 4,
+    marginTop: 4,
   },
+
+
   valuesCard: {
     marginHorizontal: 20,
     borderRadius: 20,
@@ -593,7 +654,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   valueDesc: { fontSize: 12, color: "#8B7355" },
-  
+
   // ESTILOS DEL MODAL
   modalOverlay: {
     flex: 1,

@@ -342,6 +342,7 @@ const styles = StyleSheet.create({
   listContainer: {
     padding: 16,
     backgroundColor: "#faf9f6",
+    
   },
   columnWrapper: {
     justifyContent: "space-between",
@@ -356,6 +357,9 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowColor: "#000",
     shadowOpacity: 0.05,
+    minHeight: 330, 
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   image: {
     width: "100%",
@@ -375,6 +379,9 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     padding: 12,
+    flexGrow: 1,          
+    justifyContent: "space-between",
+    
   },
   title: {
     fontSize: 15,
@@ -387,6 +394,7 @@ const styles = StyleSheet.create({
     color: "#555",
     lineHeight: 18,
     marginBottom: 8,
+    flexShrink: 1,   
   },
   priceContainer: {
     flexDirection: "row",
@@ -399,10 +407,11 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   precioAnterior: {
-    fontSize: 12,
-    color: "#999",
-    textDecorationLine: "line-through",
-    marginLeft: 6,
+    marginTop: 8,
+    borderRadius: 12,
+    backgroundColor: "#8d512fff",
+    elevation: 0,
+    alignSelf: "stretch", 
   },
   infoContainer: {
     flexDirection: "row",

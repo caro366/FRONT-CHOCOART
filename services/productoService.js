@@ -1,6 +1,23 @@
 // services/productoService.js
 import { cliente } from "../config/cliente";
 
+export const listarProductosDestacados = async (limite = 6) => {
+  try {
+    const { data } = await cliente.get("/productos/destacados/lista", {
+      params: { limite }
+    });
+    
+    if (data.success && data.productos) {
+      return data.productos;
+    }
+    
+    return [];
+  } catch (error) {
+    console.error('Error en listarProductosDestacados:', error);
+    return [];
+  }
+};
+
 export async function listarProductos(filtro = "", pagina = 1, cantidad = 20) {
   const parametros = {
     filtro: filtro,
@@ -55,5 +72,27 @@ export async function listarSubcategorias(categoriaId = null) {
   } else {
     const { data } = await cliente.get("/categorias/subcategorias/todas");
     return data;
+  }
+}
+
+// ✅ FUNCIÓN DE BÚSQUEDA - CORREGIDA
+export async function buscarProductos(termino, limite = 20) {
+  try {
+    const { data } = await cliente.get("/productos/buscar", {
+      params: {
+        q: termino,
+        limite: limite
+      }
+    });
+    return data;
+  } catch (error) {
+    console.error("Error buscando productos:", error);
+    // Retornar estructura esperada en caso de error
+    return {
+      success: false,
+      total: 0,
+      query: termino,
+      productos: []
+    };
   }
 }

@@ -434,7 +434,7 @@ export default function Perfil() {
         <Button
           mode="contained"
           icon="logout"
-          buttonColor="#c43644"
+          buttonColor="#A26B38"
           textColor="#fff"
           style={styles.logoutButton}
           onPress={onLogout}
@@ -471,7 +471,7 @@ export default function Perfil() {
                 await cerrarSesion();
                 router.replace("/sesion/iniciar-sesion");
               }}
-              textColor="#c43644"
+              textColor="#5A3E2B"
             >
               Sí, cerrar
             </Button>

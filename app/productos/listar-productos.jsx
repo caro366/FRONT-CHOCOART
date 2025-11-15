@@ -1,4 +1,4 @@
-import { View, Image } from 'react-native';
+import { View, Image, Alert } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Text, Banner, ActivityIndicator, IconButton, Divider, Chip } from 'react-native-paper';
 import { useEffect, useState } from "react";
@@ -28,21 +28,44 @@ export default function ListarProductos() {
   }
 
   async function onEliminar(producto) {
-    if (!confirm(`¿Está seguro de eliminar el producto "${producto.nombre}"?`)) {
-      return;
-    }
+    Alert.alert(
+      "Confirmar eliminación",
+      `¿Está seguro de eliminar el producto "${producto.nombre}"?\n\nEsta acción no se puede deshacer.`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await eliminarProducto(producto.id);
+              
+              // Actualizar la lista localmente sin recargar
+              setProductos(prevProductos => 
+                prevProductos.filter(p => p.id !== producto.id)
+              );
+              
+              setMensaje({ 
+                tipo: "success", 
+                texto: `Producto "${producto.nombre}" eliminado correctamente.` 
+              });
 
-    setCargando(true);
-    try {
-      await eliminarProducto(producto.id);
-      setMensaje({ tipo: "success", texto: `Producto "${producto.nombre}" eliminado correctamente.` });
-      listar();
-    } catch (e) {
-      const errorMsg = e?.response?.data?.detail || "Error al eliminar producto.";
-      setMensaje({ tipo: "danger", texto: errorMsg });
-    } finally {
-      setCargando(false);
-    }
+              // Opcional: recargar después de 1 segundo
+              setTimeout(() => {
+                listar();
+              }, 1000);
+              
+            } catch (e) {
+              const errorMsg = e?.response?.data?.detail || "Error al eliminar producto.";
+              setMensaje({ tipo: "danger", texto: errorMsg });
+            }
+          }
+        }
+      ]
+    );
   }
 
   function onEditar(producto) {
@@ -101,7 +124,7 @@ export default function ListarProductos() {
           fontWeight: "bold",
           textAlign: "center",
           marginBottom: 10,
-          color: "#336fafff",
+          color: "#A26B38",
         }}
       >
         Lista de Productos
@@ -140,7 +163,7 @@ export default function ListarProductos() {
                 <Text style={{ fontWeight: "bold", fontSize: 17, color: "#333", marginBottom: 4 }}>
                   {p.nombre}
                 </Text>
-                <Text style={{ color: "#336fafff", fontSize: 16, fontWeight: "600", marginBottom: 4 }}>
+                <Text style={{ color: "", fontSize: 16, fontWeight: "600", marginBottom: 4 }}>
                   ${p.precio?.toLocaleString('es-CO')}
                 </Text>
               </View>

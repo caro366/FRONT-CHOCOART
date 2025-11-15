@@ -130,7 +130,7 @@ export default function CrearProducto() {
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: 20,
-            color: "#336fafff",
+            color: "#A26B38",
           }}
         >
           Crear Producto
@@ -208,7 +208,7 @@ export default function CrearProducto() {
           loading={cargando}
           style={{
             marginBottom: 10,
-            backgroundColor: "#336fafff",
+            backgroundColor: "#A26B38",
             borderRadius: 8,
             paddingVertical: 5,
           }}
@@ -220,10 +220,10 @@ export default function CrearProducto() {
           mode="outlined"
           onPress={limpiar}
           disabled={cargando}
-          textColor="#336fafff"
+          textColor="#A26B38"
           style={{
             borderRadius: 8,
-            borderColor: "#336fafff",
+            borderColor: "#A26B38",
             borderWidth: 1,
           }}
         >
