@@ -10,16 +10,16 @@ import MenuAdmin from "../menu/menu-admin";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const coloresPastel = [
-  "#D4A574", 
-  "#A8C5A0", 
-  "#E8C4A0", 
-  "#C89B7B", 
-  "#B5907A", 
-  "#D9C5A8", 
-  "#A39080", 
-  "#C8B8A3", 
-  "#D5B895", 
-  "#B8A58E", 
+  "#D4A574",
+  "#A8C5A0",
+  "#E8C4A0",
+  "#C89B7B",
+  "#B5907A",
+  "#D9C5A8",
+  "#A39080",
+  "#C8B8A3",
+  "#D5B895",
+  "#B8A58E",
 ];
 
 
@@ -49,13 +49,13 @@ export default function DashBoard() {
         valores: data.ventas_mes.map((d) => d.valor),
       });
 
-      
+
       setVentasCategorias({
         etiquetas: data.ventas_categorias.map((d) => d.nombre),
         valores: data.ventas_categorias.map((d) => d.valor),
       });
 
-      
+
       const data_artesanos = data.ventas_tiendas.map((artesano, index) => ({
         name:
           artesano.nombre.length > 15
@@ -86,7 +86,7 @@ export default function DashBoard() {
         }}
       />
       <ScrollView style={styles.contenedor}>
-     
+
         <View style={styles.headerDecorativo}>
           <Text style={styles.tituloHeader}>Panel de Control</Text>
           <Text style={styles.subtituloHeader}>
@@ -99,13 +99,13 @@ export default function DashBoard() {
             {tarjetas.map((tarjeta, index) => {
               const icono =
                 iconosPorTarjeta[tarjeta.nombre] || "analytics";
-              
+
               const coloresGradiente = [
-                ["#E8D4BC", "#F5EFE6"], 
-                ["#D4C4A8", "#EAE4D5"], 
-                ["#C8B8A0", "#E5DED0"], 
-                ["#DCCBB0", "#F0E8D8"], 
-                ["#C9B89C", "#E3DBC8"], 
+                ["#E8D4BC", "#F5EFE6"],
+                ["#D4C4A8", "#EAE4D5"],
+                ["#C8B8A0", "#E5DED0"],
+                ["#DCCBB0", "#F0E8D8"],
+                ["#C9B89C", "#E3DBC8"],
               ];
 
               return (
@@ -125,26 +125,29 @@ export default function DashBoard() {
                       size={32}
                       color={
                         index === 0
-                          ? "#A67C52" 
+                          ? "#A67C52"
                           : index === 1
-                          ? "#8B9C78" 
-                          : index === 2
-                          ? "#B8956A" 
-                          : index === 3
-                          ? "#9C8266" 
-                          : "#A0826D" 
+                            ? "#8B9C78"
+                            : index === 2
+                              ? "#B8956A"
+                              : index === 3
+                                ? "#9C8266"
+                                : "#A0826D"
                       }
                     />
                   </View>
                   <View style={styles.tarjetaContenido}>
                     <Text style={styles.tarjetaTexto}>{tarjeta.nombre}</Text>
-                    <Text style={styles.tarjetaValor}>
+                    <Text style={[
+                      styles.tarjetaValor,
+                      tarjeta.nombre === "Ventas mes" && { fontSize: 25 }
+                    ]}>
                       {tarjeta.nombre === "Ventas mes"
                         ? `$${tarjeta.valor.toLocaleString()}`
                         : tarjeta.valor}
                     </Text>
                   </View>
-                  
+
                 </View>
               );
             })}
@@ -179,7 +182,7 @@ export default function DashBoard() {
                   backgroundGradientFrom: "#F5EFE6",
                   backgroundGradientTo: "#FAF6F0",
                   decimalPlaces: 0,
-                  color: (opacity = 1) => `rgba(166, 124, 82, ${opacity})`, 
+                  color: (opacity = 1) => `rgba(166, 124, 82, ${opacity})`,
                   labelColor: (opacity = 1) => `rgba(90, 80, 70, ${opacity})`,
                   style: {
                     borderRadius: 16,
@@ -206,7 +209,7 @@ export default function DashBoard() {
           )}
 
         <View style={styles.filaGraficas}>
-        
+
           {ventasArtesanos && ventasArtesanos.length > 0 && (
             <View style={styles.graficaSecundaria}>
               <View style={styles.headerGraficaSecundaria}>
@@ -231,7 +234,7 @@ export default function DashBoard() {
             </View>
           )}
 
-          
+
           {ventasCategorias?.etiquetas &&
             ventasCategorias?.valores &&
             ventasCategorias.etiquetas.length > 0 && (
@@ -268,7 +271,7 @@ export default function DashBoard() {
             )}
         </View>
 
-       
+
         {(!ventasMes?.etiquetas || ventasMes.etiquetas.length === 0) &&
           (!ventasArtesanos || ventasArtesanos.length === 0) &&
           (!ventasCategorias?.etiquetas ||
@@ -293,7 +296,7 @@ export default function DashBoard() {
 const styles = StyleSheet.create({
   contenedor: {
     flex: 1,
-    backgroundColor: "#FAF6F0", 
+    backgroundColor: "#FAF6F0",
     padding: 20,
   },
   headerDecorativo: {
@@ -389,7 +392,7 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 3,
     borderWidth: 1,
-    borderColor: "#E8DDD0", 
+    borderColor: "#E8DDD0",
   },
   graficaHeader: {
     flexDirection: "row",
@@ -417,7 +420,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   indicadorTexto: {
-    color: "#7C9C6B", 
+    color: "#7C9C6B",
     fontSize: 13,
     fontWeight: "700",
   },
@@ -434,7 +437,7 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 3,
     borderWidth: 1,
-    borderColor: "#E8DDD0", 
+    borderColor: "#E8DDD0",
     marginBottom: 12,
   },
   headerGraficaSecundaria: {

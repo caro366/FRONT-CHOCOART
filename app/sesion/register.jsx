@@ -104,7 +104,7 @@ export default function RegisterScreen() {
               letterSpacing: 0.5,
             }}
           >
-            Crear Cuenta
+            Crear cuenta
           </Text>
           <Text
             style={{
@@ -127,8 +127,8 @@ export default function RegisterScreen() {
             shadowOpacity: 0.12,
             shadowRadius: 16,
             elevation: 8,
-            borderWidth: 1,
-            borderColor: "#E8DDD0",
+            borderWidth: 0.8,
+            borderColor: "#c3a787ff",
           }}
         >
           <TextInput

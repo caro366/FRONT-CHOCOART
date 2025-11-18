@@ -151,7 +151,7 @@ const InicioRoute = () => {
       <View style={styles.headerContainer}>
         <View style={styles.headerTop}>
           <Image
-            source={require("../../assets/img/logo.png")}
+            source={require("../../assets/img/logo2.jpg")}
             style={styles.logo}
             resizeMode="contain"
           />

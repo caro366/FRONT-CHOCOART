@@ -170,6 +170,7 @@ export default function ProductCard({ productos = [] }) {
   const [mensajeDialog, setMensajeDialog] = useState("");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
   const [agregando, setAgregando] = useState(false);
+  const [descripcionesExpandidas, setDescripcionesExpandidas] = useState({});
 
   // Si no hay productos, mostrar estado vacío
   if (!productos || productos.length === 0) {
@@ -184,6 +185,13 @@ export default function ProductCard({ productos = [] }) {
       </View>
     );
   }
+
+  const toggleDescripcion = (productoId) => {
+    setDescripcionesExpandidas(prev => ({
+      ...prev,
+      [productoId]: !prev[productoId]
+    }));
+  };
 
   const handleAddToCart = async (item) => {
     if (agregando) return;
@@ -211,6 +219,8 @@ export default function ProductCard({ productos = [] }) {
   // Tarjeta de producto
   const ProductoItem = ({ item }) => {
     const enCarrito = carrito.find((producto) => producto.id === item.id);
+    const descripcionExpandida = descripcionesExpandidas[item.id];
+    const mostrarVerMas = item.descripcion && item.descripcion.length > 80;
 
     return (
       <Surface style={styles.card}>
@@ -234,9 +244,24 @@ export default function ProductCard({ productos = [] }) {
             {item.nombre}
           </Title>
 
-          <Text style={styles.description} numberOfLines={3}>
-            {item.descripcion || "Descripción no disponible"}
-          </Text>
+          <View style={styles.descripcionContainer}>
+            <Text 
+              style={styles.description} 
+              numberOfLines={descripcionExpandida ? undefined : 3}
+            >
+              {item.descripcion || "Descripción no disponible"}
+            </Text>
+            {mostrarVerMas && (
+              <TouchableOpacity 
+                onPress={() => toggleDescripcion(item.id)}
+                style={styles.verMasBtn}
+              >
+                <Text style={styles.verMasText}>
+                  {descripcionExpandida ? "Ver menos" : "Ver más"}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
 
           <View style={styles.priceContainer}>
             <Text style={styles.precio}>
@@ -388,12 +413,23 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 4,
   },
+  descripcionContainer: {
+    marginBottom: 8,
+  },
   description: {
     fontSize: 12,
     color: "#555",
     lineHeight: 18,
-    marginBottom: 8,
     flexShrink: 1,
+  },
+  verMasBtn: {
+    marginTop: 4,
+    alignSelf: 'flex-start',
+  },
+  verMasText: {
+    fontSize: 12,
+    color: "#8d512fff",
+    fontWeight: '600',
   },
   priceContainer: {
     flexDirection: "row",

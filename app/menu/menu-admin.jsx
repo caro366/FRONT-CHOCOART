@@ -80,7 +80,7 @@ export default function MenuAdmin({ children }) {
       title: "Cerrar sesión",
       icon: "logout",
       route: "/sesion/cerrar-sesion",
-      color: "#343232ff",
+      color: "#ce4343ff",
       separator: true,
     },
   ];

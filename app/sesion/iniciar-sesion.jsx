@@ -139,13 +139,13 @@ export default function IniciarSesion() {
               backgroundColor: "white",
               borderRadius: 24,
               padding: 25,
-              shadowColor: "#A67C52",
-              shadowOffset: { width: 0, height: 6 },
-              shadowOpacity: 0.12,
+              shadowColor: "#ecececff",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: 0.5,
               shadowRadius: 16,
               elevation: 8,
-              borderWidth: 1,
-              borderColor: "#E8DDD0",
+              borderWidth: 0.8,
+              borderColor: "#c3a787ff",
             }}
           >
             <Text
@@ -157,7 +157,7 @@ export default function IniciarSesion() {
                 textAlign: "center",
               }}
             >
-              Iniciar Sesión
+              Iniciar sesión
             </Text>
             <Text
               style={{
