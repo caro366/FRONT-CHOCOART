@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { TextInput, Button, Icon, Dialog, Portal, Provider } from "react-native-paper";
 import { router } from "expo-router";
 import { registrarUsuario } from "../../services/autenticacion";
@@ -15,7 +15,7 @@ export default function RegisterScreen() {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  // Estado para Dialog
+ 
   const [visible, setVisible] = React.useState(false);
   const [dialogMessage, setDialogMessage] = React.useState("");
   const [dialogTitle, setDialogTitle] = React.useState("Error");
@@ -82,191 +82,252 @@ export default function RegisterScreen() {
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 20,
-          backgroundColor: "#fff",
+          padding: 25,
+          paddingTop: 60,
+          paddingBottom: 40,
+          backgroundColor: "#ffffffff",
         }}
       >
-
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: "bold",
-            marginBottom: 15,
-            top: -30,
-          }}
-        >
-          Registrarme
-        </Text>
-
-        <TextInput
-          label="Nombre completo"
-          mode="outlined"
-          value={nombre}
-          onChangeText={setNombre}
-          left={<TextInput.Icon icon="account" />}
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <TextInput
-          label="Correo electrónico"
-          mode="outlined"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          left={<TextInput.Icon icon="email" />}
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <TextInput
-          label="Teléfono"
-          mode="outlined"
-          value={telefono}
-          onChangeText={setTelefono}
-          keyboardType="phone-pad"
-          maxLength={10}
-          left={<TextInput.Icon icon="phone" />}
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <TextInput
-          label="Dirección"
-          mode="outlined"
-          value={direccion}
-          onChangeText={setDireccion}
-          left={<TextInput.Icon icon="map-marker" />}
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <TextInput
-          label="Contraseña"
-          mode="outlined"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!showPassword}
-          left={<TextInput.Icon icon="lock" />}
-          right={
-            <TextInput.Icon
-              icon={showPassword ? "eye" : "eye-off"}
-              onPress={() => setShowPassword(!showPassword)}
-            />
-          }
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <TextInput
-          label="Confirmar contraseña"
-          mode="outlined"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={!showConfirmPassword}
-          left={<TextInput.Icon icon="lock" />}
-          right={
-            <TextInput.Icon
-              icon={showConfirmPassword ? "eye" : "eye-off"}
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-            />
-          }
-          style={{ width: "100%", marginBottom: 15, backgroundColor: "#f8f9fa" }}
-          disabled={loading}
-        />
-
-        <Text style={{ fontSize: 10, marginBottom: 20 }}>
-          Al hacer click en el botón acepta los términos y condiciones.
-        </Text>
-
-        <Button
-          mode="contained"
-          onPress={handleRegister}
-          loading={loading}
-          disabled={loading}
-          style={{
-            backgroundColor: "#aa4935ff",
-            paddingVertical: 6,
-            borderRadius: 8,
-            width: "100%",
-            marginBottom: 20,
-          }}
-          labelStyle={{ fontSize: 16 }}
-        >
-          {loading ? "Registrando..." : "Registrarme"}
-        </Button>
-
-        <Text style={{ marginBottom: 15, color: "#666" }}>- o continúa con -</Text>
-
+       
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            gap: 15,
+            alignItems: "center",
             marginBottom: 30,
           }}
         >
-          <TouchableOpacity
+          <Text
             style={{
-              borderWidth: 1,
-              borderColor: "#807f7eff",
-              borderRadius: 50,
-              padding: 12,
+              fontSize: 28,
+              fontWeight: "800",
+              marginBottom: 4,
+              color: "#A67C52",
+              letterSpacing: 0.5,
             }}
-            disabled={loading}
           >
-            <Icon source="google" size={30} color="#252120ff" />
-          </TouchableOpacity>
+            Crear Cuenta
+          </Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#7a7268",
+              fontWeight: "500",
+            }}
+          >
+            Únete a nuestra comunidad artesanal
+          </Text>
+        </View>
 
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "#807f7eff",
-              borderRadius: 50,
-              padding: 12,
-            }}
+        <View
+          style={{
+            backgroundColor: "white",
+            borderRadius: 24,
+            padding: 25,
+            shadowColor: "#A67C52",
+            shadowOffset: { width: 0, height: 6 },
+            shadowOpacity: 0.12,
+            shadowRadius: 16,
+            elevation: 8,
+            borderWidth: 1,
+            borderColor: "#E8DDD0",
+          }}
+        >
+          <TextInput
+            label="Nombre completo"
+            mode="outlined"
+            value={nombre}
+            onChangeText={setNombre}
+            left={<TextInput.Icon icon="account" color="#A67C52" />}
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
             disabled={loading}
-          >
-            <Icon source="apple" size={30} color="#44403B" />
-          </TouchableOpacity>
+          />
 
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              borderColor: "#807f7eff",
-              borderRadius: 50,
-              padding: 12,
-            }}
+          <TextInput
+            label="Correo electrónico"
+            mode="outlined"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            left={<TextInput.Icon icon="email" color="#A67C52" />}
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
             disabled={loading}
+          />
+
+          <TextInput
+            label="Teléfono"
+            mode="outlined"
+            value={telefono}
+            onChangeText={setTelefono}
+            keyboardType="phone-pad"
+            maxLength={10}
+            left={<TextInput.Icon icon="phone" color="#A67C52" />}
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
+            disabled={loading}
+          />
+
+          <TextInput
+            label="Dirección"
+            mode="outlined"
+            value={direccion}
+            onChangeText={setDireccion}
+            left={<TextInput.Icon icon="map-marker" color="#A67C52" />}
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
+            disabled={loading}
+          />
+
+          <TextInput
+            label="Contraseña"
+            mode="outlined"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            left={<TextInput.Icon icon="lock" color="#A67C52" />}
+            right={
+              <TextInput.Icon
+                icon={showPassword ? "eye-off" : "eye"}
+                color="#A67C52"
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
+            disabled={loading}
+          />
+
+          <TextInput
+            label="Confirmar contraseña"
+            mode="outlined"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry={!showConfirmPassword}
+            left={<TextInput.Icon icon="lock" color="#A67C52" />}
+            right={
+              <TextInput.Icon
+                icon={showConfirmPassword ? "eye-off" : "eye"}
+                color="#A67C52"
+                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+              />
+            }
+            style={{ width: "100%", marginBottom: 15, backgroundColor: "#FAF6F0" }}
+            outlineColor="#E8DDD0"
+            activeOutlineColor="#A67C52"
+            disabled={loading}
+          />
+
+          <Text
+            style={{
+              fontSize: 11,
+              marginBottom: 20,
+              color: "#9a9088",
+              textAlign: "center",
+              lineHeight: 16,
+            }}
           >
-            <Icon source="facebook" size={30} color="#615FFF" />
-          </TouchableOpacity>
+            Al registrarte, aceptas nuestros{" "}
+            <Text style={{ color: "#A67C52", fontWeight: "600" }}>
+              términos y condiciones
+            </Text>
+          </Text>
+
+          <Button
+            mode="contained"
+            onPress={handleRegister}
+            loading={loading}
+            disabled={loading}
+            style={{
+              backgroundColor: "#A67C52",
+              paddingVertical: 8,
+              borderRadius: 12,
+              width: "100%",
+              marginBottom: 25,
+              shadowColor: "#A67C52",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
+              elevation: 4,
+            }}
+            labelStyle={{ fontSize: 16, fontWeight: "700", letterSpacing: 0.5 }}
+          >
+            {loading ? "Registrando..." : "Crear Cuenta"}
+          </Button>
+
+
         </View>
 
         <TouchableOpacity 
           onPress={() => router.push("/sesion/iniciar-sesion")}
           disabled={loading}
+          style={{ marginTop: 25, marginBottom: 10 }}
         >
-          <Text>
-            Ya tengo una cuenta{" "}
-            <Text style={{ color: "#E1712B", fontWeight: "bold", fontSize: 15 }}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 15,
+              color: "#5a5046",
+            }}
+          >
+            ¿Ya tienes una cuenta?{" "}
+            <Text
+              style={{
+                color: "#A67C52",
+                fontWeight: "700",
+                fontSize: 16,
+              }}
+            >
               Iniciar Sesión
             </Text>
           </Text>
         </TouchableOpacity>
+
+        
+        
       </ScrollView>
 
+   
       <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Title>{dialogTitle}</Dialog.Title>
+        <Dialog
+          visible={visible}
+          onDismiss={hideDialog}
+          style={{
+            backgroundColor: "white",
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: "#E8DDD0",
+          }}
+        >
+          <Dialog.Title
+            style={{
+              color: "#A67C52",
+              fontWeight: "700",
+              fontSize: 20,
+            }}
+          >
+            {dialogTitle}
+          </Dialog.Title>
           <Dialog.Content>
-            <Text>{dialogMessage}</Text>
+            <Text style={{ color: "#5a5046", fontSize: 15 }}>
+              {dialogMessage}
+            </Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={hideDialog}>Aceptar</Button>
+            <Button
+              onPress={hideDialog}
+              textColor="#A67C52"
+              style={{
+                borderRadius: 8,
+              }}
+            >
+              Aceptar
+            </Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>

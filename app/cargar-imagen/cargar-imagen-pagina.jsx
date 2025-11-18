@@ -7,6 +7,7 @@ import { listarProductos, eliminarProducto } from '../../services/productoServic
 import { router, Stack } from 'expo-router';
 import { Appbar } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
+import Menu from "../menu/menu-admin";
 
 
 export default function CargarImagenPagina() {
@@ -66,12 +67,10 @@ export default function CargarImagenPagina() {
 
   return (
     <>
-      <Stack.Screen options={{
-        title: 'Cargar imagenes',
+    <Menu /> 
+        <Stack.Screen options={{
         headerShown: true,
-        headerStyle: {
-          backgroundColor: '#f9f8ff',
-        },
+        title: "Dashboard Artesanías"
       }} />
 
       {/* <Appbar.Header>

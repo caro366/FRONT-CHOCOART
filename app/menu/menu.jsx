@@ -1,40 +1,49 @@
-import { View } from 'react-native';
-import { ScrollView } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { obtenerRol } from '../../services/autenticacion';
-import { useEffect} from 'react';
-
-
+import { useEffect, useState } from 'react';
 import { router, Stack } from 'expo-router';
-import { List } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 
 export default function Menu() {
+  const [cargando, setCargando] = useState(true);
 
-  async function redirgir() {
-    const rol = await obtenerRol();
-    if (rol === 'admin') {
-      router.replace('/menu/menu-admin');
-    } else {
-      router.replace('/ScreensUser/home');
+  async function redirigir() {
+    try {
+      const rol = await obtenerRol();
+      if (rol === 'admin') {
+        router.replace('/dashboard');
+      } else {
+        router.replace('/ScreensUser/home');
+      }
+    } catch (error) {
+      console.error('Error al redirigir:', error);
+    } finally {
+      setCargando(false);
     }
-
-    
   }
   
-  useEffect(   () => {
- 
-  redirgir();
-
+  useEffect(() => {
+    redirigir();
   }, []);
 
-
-  return (
-    <>
- 
-      <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
-
+  if (cargando) {
+    return (
+      <>
+        <Stack.Screen options={{ headerShown: false }} />
+        <View style={{ 
+          flex: 1, 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          backgroundColor: '#f5f5f5'
+        }}>
+          <ActivityIndicator size="large" color="#A26B38" />
+          <Text style={{ marginTop: 16, fontSize: 16 }}>
+            Cargando...
+          </Text>
         </View>
-        </>
-  );
+      </>
+    );
+  }
 
+  return null;
 }
-

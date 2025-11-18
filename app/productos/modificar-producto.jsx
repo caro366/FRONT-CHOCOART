@@ -3,6 +3,11 @@ import { Text, TextInput, Switch, Button, Banner, Divider } from 'react-native-p
 import React, { useState, useEffect } from 'react';
 import { modificarProducto, obtenerProducto } from "../../services/productoService";
 import { useLocalSearchParams } from 'expo-router';
+import Menu from "../menu/menu-admin";
+import { Stack } from 'expo-router';
+
+
+
 
 export default function ModificarProducto() {
   const params = useLocalSearchParams();
@@ -149,172 +154,179 @@ export default function ModificarProducto() {
     : "https://cdn-icons-png.flaticon.com/512/463/463612.png";
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        flexGrow: 1,
-        justifyContent: 'flex-start',
-        padding: 20,
-        paddingTop: 50,
-        backgroundColor: '#f5f7fa',
-      }}
-    >
-
-      {mensaje && (
-        <Banner
-          visible={!!mensaje}
-          actions={[{ label: 'Cerrar', onPress: () => setMensaje(null) }]}
-          icon={({ size }) => (
-            <Image
-              source={{ uri: bannerIcon }}
-              style={{ width: size, height: size }}
-            />
-          )}
-          style={{
-            backgroundColor: mensaje.tipo === "success" ? "#e6ffed" : "#ffe6e6",
-            borderLeftWidth: 5,
-            borderLeftColor: mensaje.tipo === "success" ? "#4CAF50" : "#F44336",
-            marginBottom: 20,
-          }}
-        >
-          <Text style={{ color: textoColor, fontWeight: "bold" }}>
-            {mensaje.texto}
-          </Text>
-        </Banner>
-      )}
-
-      {/* FORMULARIO */}
-      <View
-        style={{
-          backgroundColor: 'white',
-          borderRadius: 12,
+    <>
+      <Menu />
+      <Stack.Screen options={{
+        headerShown: true,
+        title: "Modificar producto"
+      }} />
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'flex-start',
           padding: 20,
-          elevation: 4,
+          paddingTop: 50,
+          backgroundColor: '#f5f7fa',
         }}
       >
-        <Text
+
+        {mensaje && (
+          <Banner
+            visible={!!mensaje}
+            actions={[{ label: 'Cerrar', onPress: () => setMensaje(null) }]}
+            icon={({ size }) => (
+              <Image
+                source={{ uri: bannerIcon }}
+                style={{ width: size, height: size }}
+              />
+            )}
+            style={{
+              backgroundColor: mensaje.tipo === "success" ? "#e6ffed" : "#ffe6e6",
+              borderLeftWidth: 5,
+              borderLeftColor: mensaje.tipo === "success" ? "#4CAF50" : "#F44336",
+              marginBottom: 20,
+            }}
+          >
+            <Text style={{ color: textoColor, fontWeight: "bold" }}>
+              {mensaje.texto}
+            </Text>
+          </Banner>
+        )}
+
+        {/* FORMULARIO */}
+        <View
           style={{
-            fontSize: 24,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 20,
-            color: "#A26B38",
+            backgroundColor: 'white',
+            borderRadius: 12,
+            padding: 20,
+            elevation: 4,
           }}
         >
-          Modificar Producto
-        </Text>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "bold",
+              textAlign: "center",
+              marginBottom: 20,
+              color: "#A26B38",
+            }}
+          >
+            Modificar Producto
+          </Text>
 
-        <TextInput
-          mode="outlined"
-          label="Buscar producto por ID"
-          keyboardType="numeric"
-          value={productoId}
-          onChangeText={valor => setProductoId(valor)}
-          style={{ marginBottom: 10 }}
-        />
+          <TextInput
+            mode="outlined"
+            label="Buscar producto por ID"
+            keyboardType="numeric"
+            value={productoId}
+            onChangeText={valor => setProductoId(valor)}
+            style={{ marginBottom: 10 }}
+          />
 
-        <Button
-          mode="contained"
-          onPress={buscar}
-          disabled={cargando}
-          loading={cargando}
-          style={{
-            marginBottom: 20,
-            backgroundColor: "#A26B38",
-            borderRadius: 8,
-          }}
-        >
-          Buscar
-        </Button>
+          <Button
+            mode="contained"
+            onPress={buscar}
+            disabled={cargando}
+            loading={cargando}
+            style={{
+              marginBottom: 20,
+              backgroundColor: "#A26B38",
+              borderRadius: 8,
+            }}
+          >
+            Buscar
+          </Button>
 
-        <Divider style={{ marginBottom: 20 }} />
+          <Divider style={{ marginBottom: 20 }} />
 
-        <TextInput
-          mode="outlined"
-          label="Nombre *"
-          value={formulario.nombre}
-          onChangeText={valor => setFormulario({ ...formulario, nombre: valor })}
-          style={{ marginBottom: 10 }}
-          disabled={!productoId}
-        />
-
-        <TextInput
-          mode="outlined"
-          label="Precio (mínimo 100)"
-          keyboardType="numeric"
-          value={formulario.precio}
-          onChangeText={valor => setFormulario({ ...formulario, precio: valor })}
-          style={{ marginBottom: 10 }}
-          disabled={!productoId}
-        />
-
-        <TextInput
-          mode="outlined"
-          label="Stock"
-          keyboardType="numeric"
-          value={formulario.stock}
-          onChangeText={valor => setFormulario({ ...formulario, stock: valor })}
-          style={{ marginBottom: 10 }}
-          disabled={!productoId}
-        />
-
-        <TextInput
-          mode="outlined"
-          label="Subcategoría ID (1-8)"
-          keyboardType="numeric"
-          value={formulario.subcategoria_id}
-          onChangeText={valor => setFormulario({ ...formulario, subcategoria_id: valor })}
-          style={{ marginBottom: 10 }}
-          disabled={!productoId}
-        />
-
-        <TextInput
-          mode="outlined"
-          label="Descripción"
-          multiline
-          numberOfLines={4}
-          value={formulario.descripcion}
-          onChangeText={valor => setFormulario({ ...formulario, descripcion: valor })}
-          style={{ marginBottom: 20 }}
-          disabled={!productoId}
-        />
-
-        <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 20, gap: 10 }}>
-          <Switch
-            value={formulario.destacado}
-            onValueChange={valor => setFormulario({ ...formulario, destacado: valor })}
+          <TextInput
+            mode="outlined"
+            label="Nombre *"
+            value={formulario.nombre}
+            onChangeText={valor => setFormulario({ ...formulario, nombre: valor })}
+            style={{ marginBottom: 10 }}
             disabled={!productoId}
           />
-          <Text style={{ fontSize: 16, color: "#333" }}>Producto Destacado</Text>
+
+          <TextInput
+            mode="outlined"
+            label="Precio (mínimo 100)"
+            keyboardType="numeric"
+            value={formulario.precio}
+            onChangeText={valor => setFormulario({ ...formulario, precio: valor })}
+            style={{ marginBottom: 10 }}
+            disabled={!productoId}
+          />
+
+          <TextInput
+            mode="outlined"
+            label="Stock"
+            keyboardType="numeric"
+            value={formulario.stock}
+            onChangeText={valor => setFormulario({ ...formulario, stock: valor })}
+            style={{ marginBottom: 10 }}
+            disabled={!productoId}
+          />
+
+          <TextInput
+            mode="outlined"
+            label="Subcategoría ID (1-8)"
+            keyboardType="numeric"
+            value={formulario.subcategoria_id}
+            onChangeText={valor => setFormulario({ ...formulario, subcategoria_id: valor })}
+            style={{ marginBottom: 10 }}
+            disabled={!productoId}
+          />
+
+          <TextInput
+            mode="outlined"
+            label="Descripción"
+            multiline
+            numberOfLines={4}
+            value={formulario.descripcion}
+            onChangeText={valor => setFormulario({ ...formulario, descripcion: valor })}
+            style={{ marginBottom: 20 }}
+            disabled={!productoId}
+          />
+
+          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 20, gap: 10 }}>
+            <Switch
+              value={formulario.destacado}
+              onValueChange={valor => setFormulario({ ...formulario, destacado: valor })}
+              disabled={!productoId}
+            />
+            <Text style={{ fontSize: 16, color: "#333" }}>Producto Destacado</Text>
+          </View>
+
+          <Button
+            mode="contained"
+            onPress={guardar}
+            disabled={cargando || !productoId}
+            loading={cargando}
+            style={{
+              marginBottom: 10,
+              backgroundColor: "#A26B38",
+              borderRadius: 8,
+            }}
+          >
+            Guardar Cambios
+          </Button>
+
+          <Button
+            mode="outlined"
+            onPress={limpiar}
+            disabled={cargando}
+            textColor="#A26B38"
+            style={{
+              borderRadius: 8,
+              borderColor: "#A26B38",
+              borderWidth: 1,
+            }}
+          >
+            Limpiar
+          </Button>
         </View>
-
-        <Button
-          mode="contained"
-          onPress={guardar}
-          disabled={cargando || !productoId}
-          loading={cargando}
-          style={{
-            marginBottom: 10,
-            backgroundColor: "#A26B38",
-            borderRadius: 8,
-          }}
-        >
-          Guardar Cambios
-        </Button>
-
-        <Button
-          mode="outlined"
-          onPress={limpiar}
-          disabled={cargando}
-          textColor="#A26B38"
-          style={{
-            borderRadius: 8,
-            borderColor: "#A26B38",
-            borderWidth: 1,
-          }}
-        >
-          Limpiar
-        </Button>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 }

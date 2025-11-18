@@ -28,7 +28,7 @@ export default function Layout() {
           
           {/* PRODUCTOS */}
           <Stack.Screen name="productos/subcategoria" />
-          <Stack.Screen name="productos/listar-productos" options={{ headerBackTitleVisible: false }}/>
+          <Stack.Screen name="productos/listar-productos"/>
           
           {/* SESIÓN */}
           <Stack.Screen name="sesion/iniciar-sesion" />

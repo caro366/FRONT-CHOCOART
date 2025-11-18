@@ -11,6 +11,8 @@ import { useLocalSearchParams } from 'expo-router';
 import { cliente } from '../../config/cliente';
 import * as ImagePicker from "expo-image-picker";
 import { API_BASE } from '../../config/cliente';
+import Menu from "../menu/menu-admin";
+
 
 export default function CargarImagenPagina() {
   const [cargando, setCargando] = useState(false);

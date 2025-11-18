@@ -1,7 +1,7 @@
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { Text, Surface } from 'react-native-paper';
 
-export default function Ancestralidad() {
+export default function Historia() {
   return (
     <ScrollView style={styles.container}>
 
@@ -121,43 +121,58 @@ export default function Ancestralidad() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f1e8',
+    backgroundColor: '#ffffffff',
   },
 
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '800',
     color: '#A26B38',
     textAlign: 'center',
-    paddingVertical: 20,
+    paddingTop: 35,
+    paddingBottom: 10,
     paddingHorizontal: 25,
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+   
   },
 
   subtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#d4a574',
-    marginTop: 5,
+    marginBottom: 25,
     fontStyle: 'italic',
     textAlign: 'center',
+    fontWeight: '500',
   },
 
   card: {
-    margin: 30,
-    borderRadius: 20,
+    marginHorizontal: 20,
+    marginBottom: 25,
+    borderRadius: 25,
     backgroundColor: '#fff',
     overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.3,
+    shadowRadius: 15,
+    elevation: 8,
+    borderWidth: 3,
+    borderColor: '#d4a574',
   },
 
   imageContainer: {
     width: '100%',
-    aspectRatio: 16 / 9, // 🔥 Hace que la imagen se adapte al contenedor
+    aspectRatio: 16 / 9,
     position: 'relative',
+    borderBottomWidth: 4,
+    borderBottomColor: '#d4a574',
   },
 
   image: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // "cover" llena el espacio sin deformarse
+    resizeMode: 'cover',
   },
 
   imageOverlay: {
@@ -166,40 +181,50 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(45, 74, 62, 0.15)',
+    backgroundColor: 'rgba(212, 165, 116, 0.15)',
   },
 
   contentBox: {
-    padding: 20,
-    backgroundColor: '#fff',
+    padding: 25,
+    backgroundColor: '#fffef9',
   },
 
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 2,
+    borderBottomColor: '#f5f1e8',
   },
 
   dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
     backgroundColor: '#d4a574',
-    marginRight: 10,
+    marginRight: 12,
+    shadowColor: '#d4a574',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 3,
   },
 
   storyTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#d4a574',
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#2d4a3e',
     flex: 1,
+    letterSpacing: 0.5,
   },
 
   storyText: {
-    fontSize: 15,
-    color: '#5a5a5a',
-    lineHeight: 24,
+    fontSize: 15.5,
+    color: '#4a4a4a',
+    lineHeight: 26,
     textAlign: 'justify',
     fontFamily: 'System',
+    marginBottom: 8,
   },
 });

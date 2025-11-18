@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const data = await obtenerCarritoAPI();
- 
+
       const itemsTransformados = data.items.map(item => ({
         id: item.producto_id,
         nombre: item.nombre,
@@ -146,7 +146,7 @@ export const CartProvider = ({ children }) => {
         totalItems,
         cargarCarritoDesdeAPI,
         cargando,
-        usuarioId,      
+        usuarioId,
         setUsuarioId,
       }}
     >
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
   listContainer: {
     padding: 16,
     backgroundColor: "#faf9f6",
-    
+
   },
   columnWrapper: {
     justifyContent: "space-between",
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     shadowColor: "#000",
     shadowOpacity: 0.05,
-    minHeight: 330, 
+    minHeight: 330,
     flexDirection: "column",
     justifyContent: "space-between",
   },
@@ -378,9 +378,9 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     padding: 12,
-    flexGrow: 1,          
+    flexGrow: 1,
     justifyContent: "space-between",
-    
+
   },
   title: {
     fontSize: 15,
@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
     color: "#555",
     lineHeight: 18,
     marginBottom: 8,
-    flexShrink: 1,   
+    flexShrink: 1,
   },
   priceContainer: {
     flexDirection: "row",
@@ -410,14 +410,18 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#8d512fff",
     elevation: 0,
-    alignSelf: "stretch", 
+    alignSelf: "stretch",
   },
+
   infoContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     marginBottom: 10,
   },
+
+
+
   ratingContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -428,9 +432,9 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   stock: {
-    fontSize: 11,
-    fontWeight: "500",
+    marginTop: 4,
   },
+
   btnAgregar: {
     marginTop: 8,
     borderRadius: 12,

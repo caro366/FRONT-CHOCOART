@@ -25,6 +25,7 @@ import { useCart } from "../ScreensUser/productCard";
 import { listarCategorias, listarSubcategorias, listarProductosDestacados } from "../../services/productoService";
 import { router } from "expo-router";
 import Ferias from "../ScreensUser/ferias.jsx";
+import Historia from "../ScreensUser/historia.jsx"
 
 const InicioRoute = () => {
   const navigation = useNavigation();
@@ -182,7 +183,7 @@ const InicioRoute = () => {
 
             <TouchableOpacity
               style={styles.exploreButton}
-              onPress={() => router.push("/ScreensUser/ancestralidad")}
+              onPress={() => router.push("/ScreensUser/historia")}
             >
               <Text style={styles.exploreText}>Explora las historias →</Text>
             </TouchableOpacity>
@@ -418,6 +419,7 @@ const InicioRoute = () => {
 const CarritoRoute = () => <CartScreen />;
 const BuscarRoute = () => <SearchScreen />;
 const FeriasRoute = () => <Ferias />;
+const HistoriaRoute = () => <Historia />;
 
 export default function HomeScreen() {
   const [index, setIndex] = React.useState(0);
@@ -426,16 +428,19 @@ export default function HomeScreen() {
     { key: "inicio", title: "Inicio", focusedIcon: "home" },
     { key: "carrito", title: "Carrito", focusedIcon: "cart" },
     { key: "buscar", title: "Buscar", focusedIcon: "magnify" },
-    { key: "ferias", title: "Ferias", focusedIcon: "hand-heart" },
+    { key: "ferias", title: "Ferias", focusedIcon: "calendar-star" },
+    { key: "historia", title: "Historia", focusedIcon: "book-open-page-variant" },
 
   ]);
 
-  const renderScene = BottomNavigation.SceneMap({
-    inicio: InicioRoute,
-    carrito: CarritoRoute,
-    buscar: BuscarRoute,
-    ferias: FeriasRoute,
-  });
+ const renderScene = BottomNavigation.SceneMap({
+  inicio: InicioRoute,
+  carrito: CarritoRoute,
+  buscar: BuscarRoute,
+  ferias: FeriasRoute,
+  historia: HistoriaRoute,
+});
+
 
   return (
     <Provider>
@@ -468,7 +473,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 12,
   },
-  logo: { width: "45%", height: "1000%" },
+  logo: { width: "45%", height:"340%" },
   banner: {
     margin: 16,
     borderRadius: 20,
@@ -476,6 +481,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#DFAE6A",
     height: 270,
+    flexDirection:"start",
   },
   bannerTextContainer: {
     flex: 1,
